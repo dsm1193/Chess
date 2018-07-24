@@ -4,7 +4,7 @@ require_relative 'board'
 
 class Display
   attr_reader :cursor
-  
+
   def initialize(board)
     @board = board
     @cursor = Cursor.new([0,0], @board)
@@ -13,7 +13,7 @@ class Display
   def render
     current_cursor_pos = @cursor.cursor_pos
 
-    @board.grid.each.with_index do |row,idx|
+    @board.rows.each.with_index do |row,idx|
       row.each.with_index do |square,idx2|
 
         if current_cursor_pos == [idx,idx2]
@@ -42,6 +42,6 @@ class Display
   def change_cursor
     render
     @cursor.get_input
-    #system('clear')
   end
+  
 end
