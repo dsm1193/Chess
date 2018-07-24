@@ -16,11 +16,9 @@ class Player
       if from
         puts "#{color}'s turn. Where would you like to place?"
         to = display.change_cursor
-        system('clear') if to
       else
         puts "#{color}'s turn. Select a piece to move."
         from = display.change_cursor
-        system('clear') if from
       end
     end
     [from, to]

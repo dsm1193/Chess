@@ -2,7 +2,8 @@ require_relative 'move_modules'
 
 class Piece
 
-  attr_reader :color, :symbol, :pos, :board
+  attr_reader :color, :symbol, :board
+  attr_accessor :pos
 
   def initialize(pos=nil, color=nil,board=nil, symbol=nil)
     @pos = pos

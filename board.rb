@@ -24,7 +24,7 @@ class Board
   def move_piece(color, start_pos, end_pos)
 
     raise 'start position is empty' if empty?(start_pos)
-    
+
     if self[start_pos].color != color
       raise 'You can only move your own piece.'
     elsif !self[start_pos].moves.include?(end_pos)
@@ -32,10 +32,12 @@ class Board
     # elsif !self[start_pos].valid_moves.include?(end_pos)
     #   raise 'You cannot move into check'
     end
-    
+
     self[end_pos] = self[start_pos]
     self[end_pos].pos = end_pos
+
     self[start_pos] = @sentinel
+    self[start_pos].pos = start_pos
     nil
   end
 

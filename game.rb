@@ -5,7 +5,8 @@ require 'byebug'
 
 class Game
 
-    attr_reader :display, :board, :players, :current_player
+    attr_reader :display, :board, :players
+    attr_accessor :current_player
 
     def initialize#(player1,player2)
       @board = Board.new
@@ -18,18 +19,21 @@ class Game
     end
 
     def switch_players!
-      current_player == players[:white] ? current_player = players[:black] : current_player = players[:white]
+      if current_player == players[:white]
+        current_player = players[:black]
+      else
+        current_player = players[:white]
+      end
     end
 
     def play_turn
-    while true
+      while true
       begin
         from, to = current_player.make_move(board)
         board.move_piece(current_player.color, from, to)
-        
         switch_players!
       rescue
-        puts 'invalid!!!'
+        puts 'invalid!'
         retry
       end
     end

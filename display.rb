@@ -11,6 +11,7 @@ class Display
   end
 
   def render
+    system('clear')
     current_cursor_pos = @cursor.cursor_pos
 
     @board.rows.each.with_index do |row,idx|

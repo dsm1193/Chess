@@ -14,7 +14,6 @@ class Pawn < Piece
   end
 
   def moves
-    
     forward_moves + diagonal_attacks
   end
 
@@ -28,13 +27,11 @@ class Pawn < Piece
   end
 
   def forward_moves
-    
     i, j = pos
     single_jump = [i + forward_dir, j]
     return [] unless board.valid_pos?(single_jump) && board.empty?(single_jump)
     steps = [single_jump]
-    
-    double_jump = [i + 2 * forward_dir, 0]
+    double_jump = [ (i + 2 * forward_dir), j]
     steps << double_jump if at_start_row? && board.empty?(double_jump)
     steps
   end
