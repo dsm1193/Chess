@@ -1,15 +1,29 @@
+require_relative 'display'
+
 class Player
-  
-  attr_reader :name, :color
-  
-  def initialize(name, color, board)
-    @name = name
-    @color = color
-    @board = board
+
+  attr_reader :color, :display
+
+  def initialize(color, display)
+    @color, @display = color, display
   end
-  
-  def pieces
-    @board.grid.each do |row|
+
+  def make_move(board)
+    from, to = nil, nil
+
+    until from && to
+      display.render
+      if from
+        puts "#{color}'s turn. Where would you like to place?"
+        to = display.change_cursor
+        system('clear') if to
+      else
+        puts "#{color}'s turn. Select a piece to move."
+        from = display.change_cursor
+        system('clear') if from
+      end
+    end
+    [from, to]
   end
-  
+
 end

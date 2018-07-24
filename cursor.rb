@@ -80,27 +80,26 @@ class Cursor
     case key
     when :return, :space
       toggle_selected
-      if @selected
-        @cursor_pos
-      end  
+      @cursor_pos
     when :left, :right, :up, :down
       update_pos(MOVES[key])
+      nil
     when :ctrl_c
       Process.exit(0)
-    end
-  end
-  
-  def toggle_selected
-    if selected
-      @selected = false
     else
-      @selected = true
+      puts key
     end
   end
 
+  def toggle_selected
+    @selected = !@selected
+  end
+
   def update_pos(diff)
-    new_pos = @cursor_pos.map.with_index {|el, i| el + diff[i] }
+    new_pos = @cursor_pos.map.with_index { |el, i| el + diff[i] }
+    debugger
     if board.valid_pos?(new_pos)
+
       @cursor_pos = new_pos
     end
   end
