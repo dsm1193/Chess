@@ -97,7 +97,7 @@ class Cursor
 
   def update_pos(diff)
     new_pos = @cursor_pos.map.with_index { |el, i| el + diff[i] }
-    debugger
+
     if board.valid_pos?(new_pos)
 
       @cursor_pos = new_pos

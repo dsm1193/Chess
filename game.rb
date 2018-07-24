@@ -25,8 +25,8 @@ class Game
     while true
       begin
         from, to = current_player.make_move(board)
-        debugger
         board.move_piece(current_player.color, from, to)
+        
         switch_players!
       rescue
         puts 'invalid!!!'
