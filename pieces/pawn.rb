@@ -1,4 +1,5 @@
 require_relative 'piece'
+require 'byebug'
 
 class Pawn < Piece
 
@@ -13,7 +14,7 @@ class Pawn < Piece
   end
 
   def moves
-    up + diagonal_attacks
+    up_dirs + diagonal_attacks
   end
 
   def at_start_row?
@@ -26,16 +27,13 @@ class Pawn < Piece
   end
 
   def diagonal_attacks
-    # if @color == :b
-    #   [[pos.first+1, pos.last+1],[pos.first+1, pos.last-1]]
-    # else
-    #   [[pos.first-1,pos.last+1],[pos.first-1,pos.last-1]]
-    # end
     i, j = pos
     side_moves = [[i + forward_step, j - 1], [i + forward_step, j + 1]]
     valid_moves = []
-    side_moves.inject { |accum, plot| @board.valid_pos(plot) &&
-      !@board[plot].empty? ? accum << plot : accum }
+    side_moves.each do |plot|
+      valid_moves << plot if @board.valid_pos?(pos) && !@board[plot].empty? && @board[plot].color != @color
+    end
+    valid_moves
   end
 
 

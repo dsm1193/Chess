@@ -40,8 +40,7 @@ class Display
   end
 
   def change_cursor
-    render
     @cursor.get_input
   end
-  
+
 end
