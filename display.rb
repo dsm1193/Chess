@@ -17,20 +17,24 @@ class Display
     @board.rows.each.with_index do |row,idx|
       row.each.with_index do |square,idx2|
 
-        if current_cursor_pos == [idx,idx2]
+        if current_cursor_pos == [idx,idx2] && cursor.selected
           # puts "This is blue".colorize(:blue)
-          if square.class == NullPiece
-            print "[ ]".center(3).colorize(:blue)
-          else
-            if @cursor.selected == true
-              print  "[#{square.symbol.encode('utf-8')}]".center(3).colorize(:red)
+          # if square.class == NullPiece
+          #   print "[ ]".center(3).colorize(:blue)
+          # else
+            if square.class == NullPiece
+              print "[ ]".center(3).colorize(:red)
             else
-              print "[#{square.symbol.encode('utf-8')}]".center(3).colorize(:blue)
+              print  "[#{square.symbol.encode('utf-8')}]".center(3).colorize(:red)
+            # else
+            #   print "[#{square.symbol.encode('utf-8')}]".center(3).colorize(:blue)
             end
-            # @cursor.selected == true ? string.colorize(:red) : string.colorize(:blue)
-          end
-        elsif square.class == NullPiece
-          print " ".center(3)
+            # cursor.selected == true ? string.colorize(:red) : string.colorize(:blue)
+        elsif current_cursor_pos == [idx,idx2] && square.class == NullPiece
+          print "[ ]".center(3).colorize(:blue)
+        elsif current_cursor_pos == [idx,idx2] && square.class != NullPiece
+          print "[#{square.symbol.encode('utf-8')}]".center(3).colorize(:blue)
+
         else
           print  "#{square.symbol.encode('utf-8')}".center(3)
         end
@@ -41,7 +45,7 @@ class Display
   end
 
   def change_cursor
-    @cursor.get_input
+    cursor.get_input
   end
 
 end

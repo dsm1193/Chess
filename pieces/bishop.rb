@@ -1,4 +1,5 @@
 require_relative 'piece'
+require_relative 'move_modules'
 
 class Bishop < Piece
   include SlidingPiece
@@ -11,4 +12,5 @@ class Bishop < Piece
   def move_dirs
     diagonal_dirs
   end
+
 end
