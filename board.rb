@@ -24,12 +24,12 @@ class Board
   def move_piece(color, start_pos, end_pos)
 
     raise 'start position is empty' if empty?(start_pos)
-    
+
     if self[start_pos].color != color
-      
+
       raise 'You can only move your own piece.'
     elsif !self[start_pos].moves.include?(end_pos)
-      
+
       raise 'Invalid move.'
     # elsif !self[start_pos].valid_moves.include?(end_pos)
     #   raise 'You cannot move into check'
@@ -50,28 +50,30 @@ class Board
     self[pos].empty?
   end
 
-  # def in_check?
-  #   @current_player.color
-  #   @board.grid.each do |row|
-  #     row.each do |square|
-  #       if square.class == King && square.color == @current_player.color
-  #
-  #       end
-  #     end
-  #   end
-  # end
+  def in_check?(color)
+    king_pos = find_king(color).pos
+    pieces.any? do |piece|
+      piece.color != color && piece.moves.include?(king_pos)
+    end
+  end
 
-  # def board_check(pos, color)
-  #   @board.grid.each do |row|
-  #     row.each do |square|
-  #       if square.class != NullPiece && square.color == color
-  #
-  #       end
-  #     end
-  #   end
-  # end
+
+  def checkmate?(color)
+    return false unless in_check?(color)
+    pieces.select { |p| p.color == color }.all? do |piece|
+      piece.valid_moves.empty?
+    end
+  end
 
   private
+
+  def find_king(color)
+    pieces.find { |piece| piece.color == color && piece.is_a?(King) }
+  end
+
+  def pieces
+    @rows.flatten.reject(&:empty?)
+  end
 
   def populate_board
     @rows.each_with_index do |row, i|
