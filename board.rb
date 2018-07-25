@@ -50,26 +50,7 @@ class Board
     self[pos].empty?
   end
 
-  def in_check?(color)
-    king_pos = find_king(color).pos
-    pieces.any? do |piece|
-      piece.color != color && piece.moves.include?(king_pos)
-    end
-  end
-
-
-  def checkmate?(color)
-    return false unless in_check?(color)
-    pieces.select { |p| p.color == color }.all? do |piece|
-      piece.valid_moves.empty?
-    end
-  end
-
   private
-
-  def find_king(color)
-    pieces.find { |piece| piece.color == color && piece.is_a?(King) }
-  end
 
   def pieces
     @rows.flatten.reject(&:empty?)
@@ -120,3 +101,23 @@ class Board
   end
 
 end
+
+  # def find_king(color)
+  #   pieces.find { |piece| piece.color == color && piece.is_a?(King) }
+  # end
+  #
+  #
+  # def in_check?(color)
+  #   king_pos = find_king(color).pos
+  #   pieces.any? do |piece|
+  #     piece.color != color && piece.moves.include?(king_pos)
+  #   end
+  # end
+  #
+  #
+  # def checkmate?(color)
+  #   return false unless in_check?(color)
+  #   pieces.select { |p| p.color == color }.all? do |piece|
+  #     piece.valid_moves.empty?
+  #   end
+  # end
