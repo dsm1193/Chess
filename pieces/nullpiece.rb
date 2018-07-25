@@ -6,7 +6,7 @@ class NullPiece < Piece
 
   include Singleton
 
-  def initialize(pos=nil, color=nil,board=nil, symbol=nil)
+  def initialize(pos=nil, color=nil,board=nil, symbol=" ")
     super
   end
 

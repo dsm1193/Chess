@@ -1,7 +1,5 @@
 require_relative 'piece'
 
-
-
 class Queen < Piece
   include SlidingPiece
   def initialize(pos=nil, color=nil,board=nil, symbol="\u2655")
@@ -10,6 +8,6 @@ class Queen < Piece
   end
 
   def move_dirs
-    diagonal_dirs + horizontal_dirs + vertical_dirs
+    diagonal_dirs + horizontal_dirs
   end
 end

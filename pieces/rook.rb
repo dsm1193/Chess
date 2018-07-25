@@ -1,7 +1,7 @@
 require_relative 'piece'
 
 class Rook < Piece
-  
+
   include SlidingPiece
 
   def initialize(pos=nil, color=nil,board=nil, symbol="\u2656")
@@ -10,7 +10,7 @@ class Rook < Piece
   end
 
   def move_dirs
-    vertical_dirs + horizontal_dirs
+    horizontal_dirs
   end
 
 end

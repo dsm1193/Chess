@@ -13,11 +13,13 @@ class Player
 
     until from && to
       display.render
+      player = nil
+      color == :b ? player = "Black" : player = "White"
       if from
-        puts "#{color}'s turn. Where would you like to place?"
+        puts "#{player}'s turn. Where would you like to place?"
         to = display.change_cursor
       else
-        puts "#{color}'s turn. Select a piece to move."
+        puts "#{player}'s turn. Select a piece to move."
         from = display.change_cursor
       end
     end
