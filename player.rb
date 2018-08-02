@@ -18,9 +18,11 @@ class Player
       if from
         puts "#{player}'s turn. Where would you like to place?"
         to = display.change_cursor
+        display.reset_notifications if to
       else
         puts "#{player}'s turn. Select a piece to move."
         from = display.change_cursor
+        display.reset_notifications if from
       end
     end
     [from, to]

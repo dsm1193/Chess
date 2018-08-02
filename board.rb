@@ -21,34 +21,78 @@ class Board
     @rows[row][col] = mark
   end
 
-  def move_piece(color, start_pos, end_pos)
-
+  # def move_piece(color, start_pos, end_pos)
+  #
+  #   raise 'start position is empty' if empty?(start_pos)
+  #
+  #   if self[start_pos].color != color
+  #     debugger
+  #     raise 'You can only move your own piece.'
+  #   elsif !self[start_pos].moves.include?(end_pos)
+  #     debugger
+  #     raise 'Piece does not move like that.'
+  #   elsif !self[start_pos].valid_moves.include?(end_pos)
+  #     debugger
+  #     raise 'You cannot move into check'
+  #   end
+  #
+  #   self[end_pos] = self[start_pos]
+  #   self[end_pos].pos = end_pos
+  #   self[start_pos] = @sentinel
+  #   self[start_pos].pos = start_pos
+  #   nil
+  # end
+  def move_piece(turn_color, start_pos, end_pos)
     raise 'start position is empty' if empty?(start_pos)
-
-    if self[start_pos].color != color
-
-      raise 'You can only move your own piece.'
-    elsif !self[start_pos].moves.include?(end_pos)
-
-      raise 'Invalid move.'
-    # elsif !self[start_pos].valid_moves.include?(end_pos)
-    #   raise 'You cannot move into check'
+debugger
+    piece = self[start_pos]
+    if piece.color != turn_color
+      raise 'You must move your own piece'
+    elsif !piece.moves.include?(end_pos)
+      raise 'Piece does not move like that'
+    elsif !piece.valid_moves.include?(end_pos)
+      raise 'You cannot move into check'
     end
 
-    self[end_pos] = self[start_pos]
-    self[end_pos].pos = end_pos
-    self[start_pos] = @sentinel
-    self[start_pos].pos = start_pos
+    move_piece!(start_pos, end_pos)
+  end
+
+# move without performing checks
+  def move_piece!(start_pos, end_pos)
+    piece = self[start_pos]
+    raise 'piece cannot move like that' unless piece.moves.include?(end_pos)
+
+    self[end_pos] = piece
+    self[start_pos] = sentinel
+    piece.pos = end_pos
+
     nil
   end
 
   def valid_pos?(pos)
+    # debugger
     pos.all? { |plot| plot.between?(0,7) }
   end
 
   def empty?(pos)
     self[pos].empty?
   end
+
+  def checkmate?(color)
+    return false unless in_check?(color)
+    pieces.select { |p| p.color == color }.all? do |piece|
+      piece.valid_moves.empty?
+    end
+  end
+
+  def in_check?(color)
+    # debugger
+    king_pos = find_king(color).pos
+    pieces.any? do |piece|
+      piece.color != color && piece.moves.include?(king_pos)
+    end
+  end
+
 
   private
 
@@ -91,33 +135,17 @@ class Board
             self[[i, j]] = King.new([i,j], :w, self)
           elsif
             [i, j] == [7, 4]
-            self[[i, j]] = Queen.new([i,j], :w)
+            self[[i, j]] = Queen.new([i,j], :w, self)
           else
-            self[[i, j]] = Pawn.new([i,j], :w)
+            self[[i, j]] = Pawn.new([i,j], :w, self)
           end
         end
       end
     end
   end
 
-end
+  def find_king(color)
+    pieces.find { |piece| piece.color == color && piece.is_a?(King) }
+  end
 
-  # def find_king(color)
-  #   pieces.find { |piece| piece.color == color && piece.is_a?(King) }
-  # end
-  #
-  #
-  # def in_check?(color)
-  #   king_pos = find_king(color).pos
-  #   pieces.any? do |piece|
-  #     piece.color != color && piece.moves.include?(king_pos)
-  #   end
-  # end
-  #
-  #
-  # def checkmate?(color)
-  #   return false unless in_check?(color)
-  #   pieces.select { |p| p.color == color }.all? do |piece|
-  #     piece.valid_moves.empty?
-  #   end
-  # end
+end

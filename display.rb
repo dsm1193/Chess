@@ -3,11 +3,24 @@ require_relative 'cursor'
 require_relative 'board'
 
 class Display
-  attr_reader :cursor
+  attr_reader :cursor, :notifications
 
   def initialize(board)
     @board = board
     @cursor = Cursor.new([0,0], @board)
+    @notifications = {}
+  end
+
+  def reset_notifications
+    @notifications.delete(:error)
+  end
+
+  def uncheck
+    @notifications.delete(:check)
+  end
+
+  def set_check
+    @notifications[:check] = "Check!"
   end
 
   def render
@@ -36,7 +49,7 @@ class Display
       end
       print "\n"
     end
-    return
+    @notifications.each { |_, val| puts val }
   end
 
   def change_cursor

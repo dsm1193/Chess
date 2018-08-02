@@ -20,4 +20,21 @@ class Piece
     self.is_a?(NullPiece)
   end
 
+  def valid_moves
+   moves.reject do |end_pos|
+     move_into_check?(end_pos)
+   end
+  end
+
+  #
+  # private
+  #
+  def move_into_check?(end_pos)
+
+    sample = board.dup
+    sample.move_piece(color, pos, end_pos)
+    sample.in_check?(color)
+
+  end
+
 end

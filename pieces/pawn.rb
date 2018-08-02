@@ -14,7 +14,6 @@ class Pawn < Piece
   end
 
   def moves
-
     forward_moves + diagonal_attacks
   end
 
@@ -30,33 +29,37 @@ class Pawn < Piece
   def forward_moves
     i, j = pos
     single_jump = [i + forward_dir, j]
-
     return [] unless board.valid_pos?(single_jump) && board.empty?(single_jump)
+    # debugger
+
     steps = [single_jump]
     double_jump = [ (i + 2 * forward_dir), j]
     steps << double_jump if at_start_row? && board.empty?(double_jump)
+    # debugger
     steps
   end
 
   def diagonal_attacks
     i, j = pos
     side_moves = [[i + forward_dir, j - 1], [i + forward_dir, j + 1]]
-    valid_moves = []
+    good_moves = []
     side_moves.each do |plot|
-      valid_moves << plot if @board.valid_pos?(pos) && (!@board[plot].nil?) && @board[plot].color != @color
+      good_moves << plot if @board.valid_pos?(pos) && (!@board[plot].nil?) && @board[plot].color != @color
     end
-    valid_moves
+    # debugger
+    good_moves
+
   end
 
 
-  def move_dirs
-    up_dirs
-  end
-
-  def up_dirs
-    return MOVES[:up] if @color == :w
-    return MOVES[:down] if @color == :b
-  end
+  # def move_dirs
+  #   up_dirs
+  # end
+  #
+  # def up_dirs
+  #   return MOVES[:up] if @color == :w
+  #   return MOVES[:down] if @color == :b
+  # end
 
 
 end

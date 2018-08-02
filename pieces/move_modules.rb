@@ -10,8 +10,8 @@ module SlidingPiece
 
   def moves
     moves = []
-    move_dirs.each do |plot|
-      moves.concat( grow_unblocked_moves_in_dir(plot.first, plot.last) )
+    move_dirs.each do |x,y|
+      moves.concat( grow_unblocked_moves_in_dir(x, y) )
     end
     moves
   end
@@ -19,18 +19,15 @@ module SlidingPiece
   def grow_unblocked_moves_in_dir(x, y)
     i, j = pos
     moves_arr = []
-    while true
-      new_pos = [i+x, j+y]
 
+    while true
+      i, j = i+x, j+y
+      new_pos = [i, j]
       break unless board.valid_pos?(new_pos)
       if board.empty?(new_pos)
         moves_arr.push(new_pos)
-        x += 1 if x > 0
-        y += 1 if y > 0
-        x -= 1 if x < 0
-        y -= 1 if y < 0
       else
-        moves_arr.push(new_pos) if board[pos].color != color
+        moves_arr.push(new_pos) if board[new_pos].color != color
         break
       end
     end
@@ -58,7 +55,6 @@ module SteppingPiece
         moves.push(next_pos)
       end
     end
-
     moves
   end
 
