@@ -16,7 +16,7 @@ class Player
       player = nil
       color == :b ? player = "Black" : player = "White"
       if from
-        puts "#{player}'s turn. Where would you like to place?"
+        puts "#{player}'s turn. Where would you like to place #{board[from].class}?"
         to = display.change_cursor
 
         display.reset_notifications if to

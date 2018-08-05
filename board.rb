@@ -6,10 +6,7 @@ class Board
 
   def initialize(fill_board = true)
     @sentinel = NullPiece.instance
-    # @rows = Array.new(8) { Array.new(8, @sentinel) }
-    # populate_board(fill_board)
-    make_starting_grid(fill_board)
-
+    populate_board(fill_board)
   end
 
   def [](plot)
@@ -116,7 +113,7 @@ class Board
     king_pos || (raise 'king not found?')
   end
 
-  def make_starting_grid(fill_board)
+  def populate_board(fill_board)
     @rows = Array.new(8) { Array.new(8, sentinel) }
     return unless fill_board
 
