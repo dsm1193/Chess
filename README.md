@@ -13,9 +13,19 @@ A simple terminal based chess game that implements basic OOP concepts in Ruby.
 * Detects checks and checkmates
 
 ```ruby
-require 'redcarpet'
-markdown = Redcarpet.new("Hello World!")
-puts markdown.to_html
+  def in_check?(color)
+    position = find_king(color).pos
+    pieces.any? do |piece|
+      piece.color != color && piece.moves.include?(position)
+    end
+  end
+```
+
+```ruby
+  def checkmate?(color)
+    return false unless self.in_check?(color)
+    self.pieces.select { |piece| piece.color == color }.all? { |piece| piece.valid_moves.empty? }
+  end
 ```
 
 * Detects attacks
