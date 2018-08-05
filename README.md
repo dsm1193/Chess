@@ -30,7 +30,7 @@ A simple terminal based chess game that implements basic OOP concepts in Ruby.
 
 * Detects attacks
 
-* Shows colorized board and piece 
+* Shows board, cursor, and selection
 
 ## Demos
 
