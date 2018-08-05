@@ -10,6 +10,25 @@ A simple terminal based chess game that implements basic OOP concepts in Ruby.
 
 * Move validation
 
+```ruby
+  def move_piece(player_color, start_pos, end_pos)
+    raise 'The position is empty' if empty?(start_pos)
+
+    piece = self[start_pos]
+
+    if piece.color != player_color
+      raise 'That is not your piece.'
+    elsif !piece.moves.include?(end_pos)
+      raise 'Piece cannot move like that'
+    elsif !piece.valid_moves.include?(end_pos)
+      raise 'You cannot move into check'
+    end
+
+    #actual movement of piece
+    move_piece!(start_pos, end_pos)
+  end
+```
+
 * Detects checks and checkmates
 
 ```ruby
@@ -29,6 +48,22 @@ A simple terminal based chess game that implements basic OOP concepts in Ruby.
 ```
 
 * Detects attacks
+
+```ruby
+  def moves
+    x, y = pos
+    moves = []
+
+    move_diffs.each do |plot|
+      next_pos = [x + plot.first, y + plot.last]
+      next unless board.valid_pos?(next_pos)
+      if board.empty?(next_pos) || board[next_pos].color != color
+        moves.push(next_pos)
+      end
+    end
+    moves
+  end
+```
 
 * Shows board, cursor, and selection
 
