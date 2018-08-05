@@ -2,6 +2,8 @@
 
 A simple terminal based chess game that implements basic OOP concepts in Ruby. 
 
+![Alt Text](https://i.imgur.com/75WrbK2.gif)
+
 ## Technologies
 
 [Colorize](https://github.com/fazibear/colorize) 
@@ -66,7 +68,3 @@ A simple terminal based chess game that implements basic OOP concepts in Ruby.
 ```
 
 * Shows board, cursor, and selection
-
-## Demos
-
-![Alt Text](https://i.imgur.com/75WrbK2.gif)
