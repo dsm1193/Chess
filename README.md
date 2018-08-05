@@ -10,7 +10,7 @@ A simple terminal based chess game that implements basic OOP concepts in Ruby.
 
 ## Features
 
-* Simple terminal-based GUI. Shows board, cursor, and selection
+* Simple terminal-based GUI. Shows board, pieces, cursor, and selection
 
 * Move validation
 
