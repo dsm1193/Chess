@@ -1,16 +1,19 @@
 require_relative 'piece'
+require 'singleton'
 
 class NullPiece < Piece
-
-  require 'singleton'
+  attr_reader :symbol
 
   include Singleton
 
-  def initialize(pos=nil, color=nil,board=nil, symbol=" ")
-    super
+  def initialize
+    @symbol = ' '
+    @color = :none
+    # board.add_piece(self, pos)
   end
 
   def moves
+    []
   end
 
   def symbol

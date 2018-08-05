@@ -15,9 +15,10 @@ class Knight < Piece
      [2, 1]]
   end
 
-  def initialize(pos=nil, color=nil,board=nil, symbol="\u2658")
+  def initialize(pos, color, board, symbol="\u2658")
     super
     @symbol = "\u265E" if @color == :b
+    board.add_piece(self, pos)
   end
 
 end
