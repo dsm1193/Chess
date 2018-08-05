@@ -68,3 +68,29 @@ A simple terminal based chess game that implements basic OOP concepts in Ruby.
     moves
   end
 ```
+
+* Implements Singleton module to populate blank positions
+```ruby
+require 'singleton'
+
+class NullPiece < Piece
+  attr_reader :symbol
+
+  include Singleton
+
+  def initialize
+    @symbol = ' '
+    @color = :none
+  end
+
+  def moves
+    []
+  end
+
+  def symbol
+    @symbol = nil
+  end
+
+end
+
+```
