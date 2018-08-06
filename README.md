@@ -94,3 +94,8 @@ class NullPiece < Piece
 end
 
 ```
+## Future Development
+* Castling
+* Draws
+* Pawn promotion
+* AI
