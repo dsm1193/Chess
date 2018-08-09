@@ -4,9 +4,9 @@ class Board
 
   attr_reader :rows, :sentinel
 
-  def initialize(fill_board = true)
+  def initialize(not_duped = true)
     @sentinel = NullPiece.instance
-    populate_board(fill_board)
+    populate_board(not_duped)
   end
 
   def [](plot)
@@ -105,9 +105,9 @@ class Board
     king_pos || (raise 'king not found?')
   end
 
-  def populate_board(fill_board)
+  def populate_board(not_duped)
     @rows = Array.new(8) { Array.new(8, sentinel) }
-    return unless fill_board
+    return unless not_duped
 
     %i(w b).each do |color|
       fill_back_row(color)
