@@ -1,12 +1,12 @@
 # Chess
 
-A simple terminal based chess game that implements basic OOP concepts in Ruby. 
+A simple terminal based chess game that implements basic OOP concepts in Ruby.
 
 ![Alt Text](https://i.imgur.com/75WrbK2.gif)
 
 ## Technologies
 
-[Colorize](https://github.com/fazibear/colorize) 
+[Colorize](https://github.com/fazibear/colorize)
 
 ## Features
 
@@ -15,7 +15,7 @@ A simple terminal based chess game that implements basic OOP concepts in Ruby.
 * Move validation
 
 ```ruby
-  def move_piece(player_color, start_pos, end_pos)
+  def check_piece(player_color, start_pos, end_pos)
     raise 'The position is empty' if empty?(start_pos)
 
     piece = self[start_pos]

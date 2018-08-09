@@ -25,7 +25,7 @@ class Game
       until board.checkmate?(current_player)
         begin
           from, to =  players[current_player].make_move(board)
-          board.move_piece(current_player, from, to)
+          board.check_piece(current_player, from, to)
           switch_players!
           notify_players
         rescue StandardError => e

@@ -21,7 +21,7 @@ class Board
     @rows[row][col] = mark
   end
 
-  def move_piece(turn_color, start_pos, end_pos)
+  def check_piece(turn_color, start_pos, end_pos)
       raise 'start position is empty' if empty?(start_pos)
 
       piece = self[start_pos]
