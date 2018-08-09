@@ -23,9 +23,7 @@ class Board
 
   def check_piece(turn_color, start_pos, end_pos)
       raise 'start position is empty' if empty?(start_pos)
-
       piece = self[start_pos]
-
       if piece.color != turn_color
         raise 'You must move your own piece'
       elsif !piece.moves.include?(end_pos)
@@ -33,22 +31,17 @@ class Board
       elsif !piece.valid_moves.include?(end_pos)
         raise 'You cannot move into check'
       end
-
       move_piece!(start_pos, end_pos)
     end
 
-    # move without performing checks
-    def move_piece!(start_pos, end_pos)
-
-      piece = self[start_pos]
-      raise 'piece cannot move like that' unless piece.moves.include?(end_pos)
-
-      self[end_pos] = piece
-      self[start_pos] = sentinel
-      piece.pos = end_pos
-
-      nil
-    end
+  def move_piece!(start_pos, end_pos)
+    piece = self[start_pos]
+    raise 'piece cannot move like that' unless piece.moves.include?(end_pos)
+    self[end_pos] = piece
+    self[start_pos] = sentinel
+    piece.pos = end_pos
+    nil
+  end
 
   def dup
     new_board = Board.new(false)
@@ -93,8 +86,7 @@ class Board
   end
 
   def fill_back_row(color)
-    back_pieces = [
-      Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook
+    back_pieces = [ Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook
     ]
     i = color == :w ? 7 : 0
     back_pieces.each_with_index do |piece_class, j|
